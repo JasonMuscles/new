@@ -10,9 +10,12 @@
                 【3】查询名片->【1】删除名片 /【2】修改名片 /【0】返回主页
                 【0】退出系统
 -------------------------------------------------
-   Change Activity:2020/8/31             
+   Change Activity:2020/8/31
 -------------------------------------------------
 """
+from card_input import input_card_info
+
+
 # 定义一个公共的名片列表。
 card_list = []
 
@@ -35,6 +38,7 @@ def new_card():
     email_str = input("你的邮箱：")
     card_dict = {"name": name_str, "sex": sex_str, "phone": phone_str, "email": email_str}
     card_list.append(card_dict)
+    print("新建名片完成！")
 
 
 # 显示名片函数
@@ -61,27 +65,38 @@ def show_cards():
 
 # 查询名片函数
 def search_card():
-    find_card = input("请输入需要查询姓名：")
+
+    # 1.提示搜索的名字
+    find_name = input("请输入需要查询姓名：")
+
+    # 2.遍历
     for card_dict in card_list:
-        if find_card == card_dict["name"]:
-            print("-" * 50)
+        if card_dict["name"] == find_name:
+            print("姓名\t\t性别\t\t手机\t\t邮箱")
+            print("—" * 60)
             print("%s\t\t%s\t\t%s\t\t%s" % (card_dict["name"],
                                             card_dict["sex"],
                                             card_dict["phone"],
                                             card_dict["email"]))
-            print("-" * 50)
-        else:
-            print("未查询到【%s】的相关信息" % find_card)
-        # TODO 提示查询出结果后的操作
+            print("—" * 60)
+            # 查找到后的处理【1】删除名片 /【2】修改名片 /【0】返回主页
+            deal_card(card_dict)
+            break
+    else:
+        print("未查询到【%s】的相关信息" % find_name)
+        print("-" * 60)
 
-        break
 
-
+# 对已查询出的名片进行处理的函数
 def deal_card(card_dict):
-    action_str = input("选择需要执行的操作：\n【1】删除名片\n【2】修改名片\n【0】返回主页")
-    if action_str == 1:
+    action_str = input("【1】删除名片\n【2】修改名片\n【0】返回主页\n选择需要执行的操作：")
+    if action_str == "1":
         card_list.remove(card_dict)
-
-
-
+        print("名片删除成功！")
+    elif action_str == "2":
+        card_dict["name"] = input_card_info(card_dict["name"], "请输入新名字：")
+        card_dict["sex"] = input_card_info(card_dict["sex"], "请输入新性别：")
+        card_dict["phone"] = input_card_info(card_dict["phone"], "请输入新手机：")
+        card_dict["email"] = input_card_info(card_dict["email"], "请输入新邮箱：")
+        print("名片修改名片成功！")
 

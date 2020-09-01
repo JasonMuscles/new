@@ -25,40 +25,16 @@ while True:
     # 2.判断用户需要执行的功能
     function_list = ["0", "1", "2", "3"]
     if action_str in function_list:
-        if action_str == "1":
+        if action_str == "1":  # 新建名片
             cards_tools.new_card()
-            print("新建名片完成！")
-        elif action_str == "2":
+
+        elif action_str == "2":  # 显示所有名片信息
             cards_tools.show_cards()
-            print("显示名片")
-        elif action_str == "3":
+
+        elif action_str == "3":  # 查询名片
             cards_tools.search_card()
-            print("查询名片")
-        elif action_str == "0":
-            print("退出系统")
+
+        elif action_str == "0":  # 退出系统
             break
     else:
         print("输入有误！请检查输入内容。")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
